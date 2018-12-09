@@ -1,7 +1,7 @@
 ##DeathStar
  
  DeathStar是一个很强悍的自动化工具。三言两语无法解释清楚，看byt3bl33d3r的流程图。
- ![](media/15443473833238/15443476068629.jpg)
+ ![](https://raw.githubusercontent.com/crazywa1ker/DarthSidious-Chinese/master/EXECUTION/images/思维导图.jpg)
 
 
 运行DeathStar后，只需喝杯咖啡的时间，就可以恭喜你已经成为域控管理员啦！
