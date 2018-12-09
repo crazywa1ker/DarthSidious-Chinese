@@ -23,7 +23,7 @@
 
 ###外网
 现如今绝大部分企业都为自己的员工提供了企业邮箱，所以当我们在外网发起的攻击时就可以把这作为一个攻击入口。下面以OutLook(下面简称OWA)）为例说明:
-![](https://raw.githubusercontent.com/crazywa1ker/DarthSidious-Chinese/master/INITIAL%20ACCESS/15405551684973.png)
+![](https://raw.githubusercontent.com/crazywa1ker/DarthSidious-Chinese/master/INITIAL%20ACCESS/images/owa.png)
 
 如图，如果我们可以尝试用普通密码验证时找到其规律。我们就可以尝试使用公共密码进行身份验证。但是要注意在碰撞的时候不要超过登录失败后账户锁定的阈值。很多企业门户在连续尝试五到十次之后就账户就会被锁定了，有些甚至只有三次机会。锁定的时间通常为30分钟。在碰撞时一定要谨慎，具体情况得具体分析。
 
