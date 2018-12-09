@@ -6,6 +6,7 @@
 
 运行DeathStar后，只需喝杯咖啡的时间，就可以恭喜你已经成为域控管理员啦！
 
+
 注:在融合DeathStar和Empire时遇到了一些麻烦。在[DeathStar](https://github.com/byt3bl33d3r/DeathStar )的Github页面上有作解释，我会尽快解决的。
 
 详细简介：https://blog.stealthbits.com/automating-mimikatz-with-empire-and-deathstar/​
