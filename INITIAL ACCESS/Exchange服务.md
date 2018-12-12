@@ -1,19 +1,19 @@
-##Exchange服务
+## Exchange服务
 
 
-###前期准备
+### 前期准备
 * 安装[golang](https://github.com/golang/) 
 * 安装[ruler](https://github.com/sensepost/ruler) 
 * 有效的域用户凭证
 
 -------
-###简介
+### 简介
 Ruler是一款交互式的远程Exchange服务管理工具，其使用MAPI/HTTP或RPC/HTTP协议。主要是用来利用Outlook客户端的一些特性获取shell。
 
 Ruler会尝试与Exchange服务连接，并使用Autodiscover服务来发现相关信息。
 
 -------
-###Ruler可以用来做些什么
+### Ruler可以用来做些什么
 
 Ruler可以用来做很多事情，下面将会列出它的主要功能，也将展示一种利用Ruler反弹shell的方法，仅需要一个有效的用户名和密码来登录Outlook就可以办到。这也是前面为什么我们要碰撞出有效的账户来，这对之后反弹shell非常有用。
 
