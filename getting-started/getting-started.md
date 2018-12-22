@@ -9,9 +9,9 @@
 * Empire, Bloodhound和ranger等工具的使用
 * 实际渗透测试案例
 
-如果你对上面的内容感到不知所措，那么我推荐你先看一下[Windows微指南 ](https://github.com/chryzsh/DarthSidious/tree/fdd707cf9dbbc2faf3cf3dbbcd712b06fceeee87/labs/stuff/miniguide.md)之后再开始阅读[搭建实验环境](https://github.com/chryzsh/DarthSidious/tree/fdd707cf9dbbc2faf3cf3dbbcd712b06fceeee87/labs/labs/building-a-lab.md)。
+如果你对上面的内容感到不知所措，那么我推荐你先看一下[Windows的哈希](https://github.com/crazywa1ker/DarthSidious-Chinese/blob/c6a34e54bf4195829a27866986287e2e44540975/getting-started/intro-to-windows-hashes.md)之后再开始阅读[搭建实验环境](https://github.com/crazywa1ker/DarthSidious-Chinese/blob/c6a34e54bf4195829a27866986287e2e44540975/BUILDING-A-LAB/%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%B1%9E%E4%BA%8E%E4%BD%A0%E7%9A%84%E5%9F%9F%E6%B8%97%E9%80%8F%E7%8E%AF%E5%A2%83.md)。
 
-如果你已经清楚以上的内容并且已经搭建好了一套实验环境，那么我建议你直接看[Network access to Domain Admin](https://github.com/chryzsh/DarthSidious/tree/fdd707cf9dbbc2faf3cf3dbbcd712b06fceeee87/labs/general/network-access-to-domain-admin.md)的内容，去了解攻击Active Directory域的一般方法。
+如果你已经清楚以上的内容并且已经搭建好了一套实验环境，那么我建议你直接看[Network access to Domain Admin](https://github.com/crazywa1ker/DarthSidious-Chinese/blob/c6a34e54bf4195829a27866986287e2e44540975/getting-started/external-network-access-to-domain-admin.md)的内容，去了解攻击Active Directory域的一般方法。
 
 **免责声明**
 
