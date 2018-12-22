@@ -1,10 +1,10 @@
 # SILENTTRINITY
 
-SILENTTRINITY 是 [byt3bl33d3r](https://twitter.com/byt3bl33d3r) 用python写的一个工具， 它使用Ironpython，为了方便描述，这里我们称之为 ST.
+SILENTTRINITY 是 [byt3bl33d3r](https://twitter.com/byt3bl33d3r) 用python写的一个工具， 它使用Ironpython，为了方便描述，这里我们称之为 ST.
 
 ## 安装
 
-安装这个工具和依赖，然后启动。这里包含手动安装最新版和最优秀的 [impacket](https://github.com/SecureAuthCorp/impacket)。
+安装这个工具和它的依赖，然后启动。这里包含手动安装最新版和 [impacket](https://github.com/SecureAuthCorp/impacket)。
 
 ```bash
 #Install deps
@@ -106,7 +106,7 @@ woc好像发生了什么。。我们回ST里看看。
 
 ## 模块
 
-现在我们列出刚刚获得的会话。因为我从提过权的shell触发了 payload，所以我们有一个提权了的会话。这允许我们做一些事情，比如dump 凭证和其他类型的后期利用。
+现在我们列出刚刚获得的会话。因为我从提过权的shell触发了 payload，所以我们有一个提权了的会话。这允许我们做一些事情，比如dump 凭证和其他类型的后期利用。
 
 ```bash
 sessions

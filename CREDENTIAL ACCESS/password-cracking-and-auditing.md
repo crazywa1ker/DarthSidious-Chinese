@@ -3,17 +3,17 @@
 ![](images/1.png)
 
 这是渗透测试中最有趣的部分之一！坐在后面喝杯咖啡，享受密码刷屏几个小时。我是hashcat 的舔狗，所以本文将详细介绍如何使用hashcat。John 是一个可选的替代方案，如果通过用散列与彩虹表进行比较来破解，可以使用Orphcrack，但是我还不打算在本指南中详细介绍它们。
-
+
 
 ---
 
 ## Hashcat
 
-一些有用的链接
+一些有用的链接
 
 * [FAQ](https://hashcat.net/wiki/doku.php?id=frequently_asked_questions#how_can_i_show_previously_cracked_passwords_and_output_them_in_a_specific_format_eg_emailpassword)
 * [命令行参数](https://hashcat.net/wiki/doku.php?id=hashcat)
-* [hashat 模式码](https://hashcat.net/wiki/doku.php?id=example_hashes)
+* [hashat 模式码](https://hashcat.net/wiki/doku.php?id=example_hashes)
 * [Hashview, hashcat的web前端](http://www.hashview.io/screenshots.html)
 
 Hashcat可以用GPU破解各种哈希。在这些例子中，最需要破解的是NTLM哈希、Kerberost tickets 和其他您可能偶然发现的东西，比如 Keepass 数据库。其目标自然是尽量快地破解，你会看到一堆垃圾密码。我强烈建议搞一个牛X点的GPU，这样就开心许多。即使我的GTX 1060 3GB并不咋地，我还是用它破解NTLM。
@@ -26,7 +26,7 @@ Hashcat可以用GPU破解各种哈希。在这些例子中，最需要破解的�
 | 1000 | NTLM | 很常见，用于一般域身份验证 |
 | 1100 | MsCache | 老版本的域缓存凭据 |
 | 2100 | MsCache v2 | 新版本的域缓存凭据 |
-| 3000 | LM | 很少用，也是老版本（仍然是NTLM的一部分）|
+| 3000 | LM | 很少用，也是老版本（仍然是NTLM的一部分）|
 | 5500 | NetNTLMv1 / NetNTLMv1+ESS | 通过网络进行身份验证的NTLM |
 | 5600 | NetNTLMv2 | 通过网络进行身份验证的NTLM |
 | 7500 | Kerberos 5 AS-REQ Pre-Auth etype 23 | AS_REQ 是 Kerberoas 的初始用户身份认证请求 |
@@ -46,26 +46,26 @@ hashcat64.exe -a 0 -m 1000 ntlm.txt rockyou.txt
 
 ### 基于规则的破解
 
-规则就是对单词进行不停额修改，比如剪切或者扩展单词，或者添加一些字母特殊字符之类的。跟字典破解一样，这也需要一个很大的规则列表，基于规则的攻击基本上类似于字典攻击，但是增加了一些对单词的修改，这自然增加了我们能够破解的哈希。
+规则就是对单词进行不停额修改，比如剪切或者扩展单词，或者添加一些字母特殊字符之类的。跟字典破解一样，这也需要一个很大的规则列表，基于规则的攻击基本上类似于字典攻击，但是增加了一些对单词的修改，这自然增加了我们能够破解的哈希。
 
-hashcat有一些自带的规则，比如dive。但是人们已经使用统计数据来尝试生成更高效的破解规则。本文详细描述了一个名为 [One Rule to Rule Them All](https://www.notsosecure.com/one-rule-to-rule-them-all/) 的规则集，可以从Github上下载。我用这个规则已经取得了很大的成功，而且统计数据证明它是非常好的。如果想用更少的规则更快地破解，那么 hashcat 中有很多内置的规则，比如 best64.rule。使用 best64 规则集y运行rockyou
+hashcat有一些自带的规则，比如dive。但是人们已经使用统计数据来尝试生成更高效的破解规则。本文详细描述了一个名为 [One Rule to Rule Them All](https://www.notsosecure.com/one-rule-to-rule-them-all/) 的规则集，可以从Github上下载。我用这个规则已经取得了很大的成功，而且统计数据证明它是非常好的。如果想用更少的规则更快地破解，那么 hashcat 中有很多内置的规则，比如 best64.rule。使用 best64 规则集y运行rockyou
 
 ```bash
 hashcat64.exe -a 0 -m 1000 -r ./rules/best64.rule ntlm.txt rockyou.txt
 ```
 
-这里你可以把字典和规则都尝试下，只要你的gpu和散热足够屌，你就可以上天。
+这里你可以把字典和规则都尝试下，只要你的gpu和散热足够屌，你就可以上天。
 
 在破解一定数量的哈希之后，将破解的密码输出到一个文件里.
 
-`--out-file 2` 表示只输出密码。
+`--out-file 2` 表示只输出密码。
 
 ```
 hashcat64.exe -a 0 -m 1000 ntlm.txt rockyou.txt --outfile cracked.txt --outfile-format 2
 Recovered........: 1100/2278 (48.28%)
 ```
 
-继续以破解的密码作为单词列表再次破解，并设置一个大规则集以恢复更多密码。你可以这样循环几次，这样你可以用这个技术破解大量密码。
+继续以破解的密码作为单词列表再次破解，并设置一个大规则集以恢复更多密码。你可以这样循环几次，这样你可以用这个技术破解大量密码。
 
 ```bash
 hashcat64.exe -a 0 -m 1000 ntlm.txt cracked.txt -r .\rules\OneRuleToRuleThemAll.rule
@@ -83,7 +83,7 @@ Recovered........: 1200/2278 (52.68%)
 hashcat64.exe -a 0 -m 1000 ntlm.txt weakpass_2a.txt -r .\rules\oneruletorulethem.rule
 ```
 
-### 掩码攻击
+### 掩码攻击
 
 尝试给定字符空间的所有组合。很像暴力破解，但是更加具体一点。
 
@@ -107,7 +107,7 @@ hashcat64.exe -a 3 -m 1000 ntlm.txt .\masks\8char-1l-1u-1d-1s-compliant.hcmask
 2. 需要一个按键字典
 3. 需要一个有针对性的字典
 
-#### 非英语字典
+#### 非英语字典
 
 对于第一种情况，我的朋友 @tro 和我分享了他的技巧。我们下载了给定语言的维基百科，然后用一句话对其进行处理，对其进行精简并且去除所有特殊字符。
 
@@ -129,19 +129,19 @@ greek wordlist site:github.com
 greek dictionary site:github.com
 ```
 
-还有我注意到我拉取下来的列表中，有一些类似于ÆØÅ的字符有时候被一些特殊字符替换了，所以记住下载完成之后快速浏览一下你的列表，如果有必要的话做一些替换。
+还有我注意到我拉取下来的列表中，有一些类似于ÆØÅ的字符有时候被一些特殊字符替换了，所以记住下载完成之后快速浏览一下你的列表，如果有必要的话做一些替换。
 
-当你下载完成并且解决了一些潜在的错误之后，用linux命令行对其进行分割，删除特殊字符，并且统一转换成小写。
+当你下载完成并且解决了一些潜在的错误之后，用linux命令行对其进行分割，删除特殊字符，并且统一转换成小写。
 
 ```bash
 sed -e 's/[;,()'\'']/ /g;s/ */ /g' list.txt | tr '[:upper:]' '[:lower:]' > newlist.txt
 ```
 
-你现在应该有了一个又好又漂亮的特定语言的字典。 也应该理解为什么要学习类似 cut, tr, sed, awk, piping 的东西，于此同时，也应该知道重定向是一个多么该死的应用。
+你现在应该有了一个又好又漂亮的特定语言的字典。 也应该理解为什么要学习类似 cut, tr, sed, awk, piping 的东西，于此同时，也应该知道重定向是一个多么该死的应用。
 
 #### Bonus
 
-这样你就可以获得名词和地名的列表，它们经常被用作密码，人们都爱自己的孩子和孙子，因此常用他们的名字作为密码。我稍微google了一下，从github上发现了这些，这些都是json格式的，但这不是问题。
+这样你就可以获得名词和地名的列表，它们经常被用作密码，人们都爱自己的孩子和孙子，因此常用他们的名字作为密码。我稍微google了一下，从github上发现了这些，这些都是json格式的，但这不是问题。
 
 linux 大法好
 ```bash
@@ -186,20 +186,20 @@ nice，又多了200万个不同的挪威单词。
 cewl -w list.txt -d 5 -m 5 http://example.com
 ```
 
-我们应该有一个相当大的字典，它基于与该企业相关的词汇，比如名称、地点以及它们的许多商业术语。
+我们应该有一个相当大的字典，它基于与该企业相关的词汇，比如名称、地点以及它们的许多商业术语。
 
 另外一种针对性的策略就是使用用户名作为字典进行破解，但是要注意，很多密码策略是不允许这样设置密码的。
 
-于此同时，如果你已经从域控制器中dump了数据库，那么你可能有所有员工的全名，一个技巧就是用他们的姓和名作为字典，用规则进行密码破解。这样可能提供一些额外的结果。
+于此同时，如果你已经从域控制器中dump了数据库，那么你可能有所有员工的全名，一个技巧就是用他们的姓和名作为字典，用规则进行密码破解。这样可能提供一些额外的结果。
 
 ### 你能用到的一些hashcat选项
 
-* 输出还没有破解的哈希 `--left`
+* 输出还没有破解的哈希 `--left`
 * 以 hash:password 的形式输出已经破解的密码 `--show`
-* 以 username:hash:password 的形式输出已经破解的密码。 `--show --username`
+* 以 username:hash:password 的形式输出已经破解的密码。 `--show --username`
 * 用 `-w <number>` 烧你的gpu，等级是 1-3
 * 将已经破解的密码输出到文件 `--show --outfile cracked.txt --outfile-format 2 ` - 其中2表示输出结果。
-* 让hashcat以会话的形式启动， 它可以暂停，并且使用`--session <session_name>` 的形式恢复。你可以在暂停会话的时候指定会话名。
+* 让hashcat以会话的形式启动， 它可以暂停，并且使用`--session <session_name>` 的形式恢复。你可以在暂停会话的时候指定会话名。
 
 ## 在线hash破解工具
 
@@ -210,7 +210,7 @@ cewl -w list.txt -d 5 -m 5 http://example.com
 
 一个python脚本，它将根据从域控制器转储的密码散列和密码破解文件（比如Hashcat生成的hashcat.potfile）生成密码使用统计数据。该报告是一个带有链接的HTML页面。
 
-在包含散列文件（`username:lm:nt:`）和包含破解散列的potfile 上运行DPAT。以“domainusername”的格式将域管理列表添加到名为Domain_Admins的文件中。然后它也会显示你破解了多少人的密码。emmm
+在包含散列文件（`username:lm:nt:`）和包含破解散列的potfile 上运行DPAT。以“domainusername”的格式将域管理列表添加到名为Domain_Admins的文件中。然后它也会显示你破解了多少人的密码。emmm
 
 ```bash
 ./dpat.py -n onlyntlm.txt -c hashcat.potfile -g Domain_Admins
